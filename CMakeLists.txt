@@ -18,10 +18,18 @@ add_compile_options(-Wall
 
 add_executable(pico-solar
         main.c
+        dht.c
+        i2c_lcd.c
+        ohms_law.c
         )
 
 # Pull in our pico_stdlib which pulls in commonly used features
-target_link_libraries(pico-solar pico_stdlib hardware_adc hardware_irq)
+target_link_libraries(pico-solar
+  pico_stdlib
+  hardware_adc
+  hardware_i2c
+  hardware_irq
+  )
 
 pico_enable_stdio_usb(pico-solar 0)
 pico_enable_stdio_uart(pico-solar 1)
