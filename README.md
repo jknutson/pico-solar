@@ -9,3 +9,9 @@
 | GP15 | DHT Data             |
 | GP26 | Voltage Divider Vout |
 
+### Voltage Divider
+
+| Resistor | Value (ohm) |
+| -------- | ----------- |
+| R1       | 10,000      |
+| R2       | 2,000       |
