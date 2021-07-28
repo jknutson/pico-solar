@@ -98,6 +98,17 @@ void lcd_clear(void) {
     lcd_send_byte(LCD_CLEARDISPLAY, LCD_COMMAND);
 }
 
+/*
+// untested
+void lcd_clear_line(int line_idx, int line_length) {
+  lcd_set_cursor(line_idx, 0);
+  char clear_str[line_length];
+  for(int i = 0; i < line_length; i++) {
+    lcd_char(" ");
+  }
+}
+*/
+
 // go to location on LCD
 void lcd_set_cursor(int line, int position) {
     int val = (line == 0) ? 0x80 + position : 0xC0 + position;

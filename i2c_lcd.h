@@ -6,3 +6,4 @@ void lcd_set_cursor(int line, int position);
 static void inline lcd_char(char val);
 void lcd_string(const char *s);
 void lcd_init();
+void lcd_clear_line(int line_idx, int line_length);

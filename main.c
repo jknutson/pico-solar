@@ -63,29 +63,21 @@ int main() {
   char lcd_text[MAX_LINES][MAX_CHARS];
   char prev_lcd_text[MAX_LINES][MAX_CHARS];
   for (;;) {
-    // Read ADC
-    float result = sampled_adc_read(ADC_NUM_SAMPLES);
-    float result_v = result * ADC_CONVERSION_FACTOR;
-    float voltage = voltage_divider(result_v, 10000.0, 2000.0);
-    sprintf(lcd_text[1], "V: %.2fv", voltage);
-
     // Read DHT
     dht_reading reading;
     read_from_dht(&reading, DHT_PIN);
     float fahrenheit = (reading.temp_celsius * 9 / 5) + 32;
     sprintf(lcd_text[0], "T:%.0f%sF, RH:%.0f%%", fahrenheit, deg_sign, reading.humidity);
 
+    // Read ADC
+    float result = sampled_adc_read(ADC_NUM_SAMPLES);
+    float result_v = result * ADC_CONVERSION_FACTOR;
+    float voltage = voltage_divider(result_v, 10000.0, 2000.0);
+    sprintf(lcd_text[1], "V: %.3fv", voltage);
+
     // Draw LCD
-    /*
-    // need a clear_line fn for this method to work
-    for (int i = 0; i < MAX_LINES; i++) {
-      if (strcmp(lcd_text[i], prev_lcd_text[i]) != 0) {
-        lcd_set_cursor(i, 0);
-        lcd_string(lcd_text[i]);
-      }
-    }
-    */
-    if (strcmp(lcd_text, prev_lcd_text) != 0) {
+    if (strcmp(lcd_text[0], prev_lcd_text[0]) != 0 &&
+        strcmp(lcd_text[1], prev_lcd_text[1]) != 0) {
       lcd_clear();
       for (int i = 0; i < MAX_LINES; i++) {
         lcd_set_cursor(i, 0);
