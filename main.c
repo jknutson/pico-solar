@@ -70,11 +70,15 @@ int main() {
     float fahrenheit = (reading.temp_celsius * 9 / 5) + 32;
     sprintf(lcd_text[0], "T:%.0f%sF, RH:%.0f%%", fahrenheit, deg_sign, reading.humidity);
 
+#ifndef ADC_DISABLED
     // Read ADC
     float result = sampled_adc_read(ADC_NUM_SAMPLES);
     float result_v = result * ADC_CONVERSION_FACTOR;
     float voltage = voltage_divider(result_v, 10000.0, 2000.0);
     sprintf(lcd_text[1], "V: %.3fv", voltage);
+#else
+    strcpy(lcd_text[1], "");
+#endif
 
     // Draw LCD
     if (strcmp(lcd_text[0], prev_lcd_text[0]) != 0 &&
@@ -86,8 +90,10 @@ int main() {
       }
     }
     strcpy(prev_lcd_text[0], lcd_text[0]);
+#ifndef ADC_DISABLED
     strcpy(prev_lcd_text[1], lcd_text[1]);
-    printf("%s\n%s\n", lcd_text[0], lcd_text[1]);
+#endif
+    printf("beep\n");
     sleep_ms(2000);
   }
   return 0;
