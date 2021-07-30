@@ -93,7 +93,6 @@ int main() {
 #ifndef ADC_DISABLED
     strcpy(prev_lcd_text[1], lcd_text[1]);
 #endif
-    printf("beep\n");
     sleep_ms(2000);
   }
   return 0;
