@@ -31,8 +31,8 @@ target_link_libraries(pico-solar
   hardware_irq
   )
 
-pico_enable_stdio_usb(pico-solar 0)
-pico_enable_stdio_uart(pico-solar 1)
+pico_enable_stdio_usb(pico-solar 1)
+pico_enable_stdio_uart(pico-solar 0)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(pico-solar)

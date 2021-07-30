@@ -14,6 +14,7 @@
 #include "dht.h"
 #include "i2c_lcd.h"
 #include "ohms_law.h"
+#include "pins.h"
 
 // ADC
 // 12-bit conversion, assume max value == ADC_VREF == 3.3 V
@@ -24,7 +25,7 @@ const int ADC_NUM_SAMPLES = 5;
 #ifdef PICO_DEFAULT_LED_PIN
 #define LED_PIN PICO_DEFAULT_LED_PIN
 #endif
-const uint DHT_PIN = 15;
+const uint DHT_PIN = 5;
 
 // LCD
 #define MAX_LINES      2
@@ -86,6 +87,7 @@ int main() {
     }
     strcpy(prev_lcd_text[0], lcd_text[0]);
     strcpy(prev_lcd_text[1], lcd_text[1]);
+    printf("%s\n%s\n", lcd_text[0], lcd_text[1]);
     sleep_ms(2000);
   }
   return 0;
